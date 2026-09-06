@@ -15,7 +15,7 @@
 
 ## 内容配置
 
-`assets/data.js` 管理 5 个通用智能体、12 个行业组合（2 个已上线、10 个规划中），共 16 个独立智能体。
+`assets/data.js` 管理 6 个通用智能体、12 个行业组合（2 个已上线、10 个规划中），共 17 个独立智能体。
 
 - `AGENT_GUIDES` / `INDUSTRY_GUIDES`：用途、适用对象、输入材料、输出、示例与使用边界；在行业复用数据装配前应用。
 - `AGENT_PRICE_TIERS` / `PRICE_PROFILES`：每个助手对应的云端建议价、任务额度、私有化方案起价。
@@ -50,4 +50,4 @@ SITE.trialBase 仍为原占位地址 https://ai-trial.example.com。详情页检
 部署需一并上传 employees.html、这些资源及 assets/digital-employees 原图目录。
 完整产品依据、竞品价格、建议价与实施边界见 docs/digital-employees.md。
 
-会议与记录产品：`assets/products-data.js` 维护内容与价格，`products.html?product=zhijitong` 和 `products.html?product=jihuitong` 为独立详情。定价依据见 [docs/meeting-products.md](docs/meeting-products.md)。
+会议与记录（原智记通、极会通）已合并为第 6 个通用智能体「智会」，详情页 `detail.html?agent=zhihui` 以"两种使用形态"展示录音卡与视频会议两条内容，不再单独设 products.html。定价依据见 [docs/meeting-products.md](docs/meeting-products.md)。

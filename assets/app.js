@@ -34,7 +34,7 @@
 
   /* 语义化矩阵：品牌下分通用和行业两个产品分组，链接进入独立详情。 */
   function renderHeroVisual() {
-    const uses = ["办公协同", "研究决策", "内容创作", "知识问答", "数据分析"];
+    const uses = ["办公协同", "研究决策", "内容创作", "知识问答", "数据分析", "会议记录"];
     $("#hero-matrix").innerHTML = `
       <div class="matrix-root"><span class="matrix-logo">智</span><div><p>AI AGENT FAMILY</p><h2>${esc(SITE.brand)} <span>· 智系列</span></h2></div><span class="matrix-index">产品矩阵</span></div>
       <div class="matrix-branch" aria-hidden="true"></div>
@@ -43,7 +43,6 @@
         <div class="matrix-general">${ALL_GENERAL.map((a,i)=>`<a class="matrix-item" href="detail.html?agent=${a.id}"><svg viewBox="0 0 24 24" aria-hidden="true">${a.icon}</svg><b>${esc(a.short)}</b><span>${uses[i] || "通用能力"}</span></a>`).join("")}</div></section>
       <section class="matrix-group industry-matrix"><div class="matrix-heading"><h3>行业智能体</h3><span>智政、智企已上线 · 其余规划中</span></div>
         <div class="matrix-industries">${INDUSTRY_SETS.map(st=>`<a href="detail.html?set=${st.id}" class="matrix-item ${st.status === "plan" ? "is-planned" : "is-online"}"><b>${esc(st.name)}</b><span class="sr-only">${esc(st.domains[0])} · ${st.status === "plan" ? "规划中" : "已上线"}</span></a>`).join("")}</div></section>
-      <section class="matrix-meetings"><h3>会议与记录</h3><div>${MEETING_PRODUCTS.map(p=>`<a href="products.html?product=${p.id}">${p.icon}<span><b>${esc(p.name)}</b><small>${esc(p.priceLabel)}</small></span><span aria-hidden="true">↗</span></a>`).join("")}</div></section>
       <div class="matrix-base">统一能力底座 <span>知识库 / 工作流 / 模型服务</span></div>`;
   }
 
@@ -220,7 +219,6 @@
   }
 
   /* ---------------- 启动 ---------------- */
-  $("#meeting-grid").innerHTML = MEETING_PRODUCTS.map(p=>`<article class="meeting-card"><div class="meeting-card-top"><span class="meeting-symbol">${p.icon}</span><span class="plan-label">${esc(p.type)}</span></div><h3>${esc(p.name)}</h3><p class="meeting-promise">${esc(p.tagline)}</p><p class="meeting-description">${esc(p.desc)}</p><div class="meeting-tags">${p.tags.map(t=>`<span>${esc(t)}</span>`).join("")}</div><div class="meeting-card-foot"><div><span>${esc(p.priceCaption)}</span><p><b>¥${p.price}</b> ${esc(p.unit)}</p></div><a class="btn btn-outline" href="products.html?product=${p.id}">了解产品与价格 →</a></div></article>`).join("");
   renderEmployees();
   renderStats();
   renderHeroVisual();

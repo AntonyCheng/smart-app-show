@@ -20,7 +20,7 @@ const STATUS = {
   plan: { label: "规划中", cls: "plan" },
 };
 
-/** ---------- 通用智能体体系（5 大通用智能体） ---------- */
+/** ---------- 通用智能体体系（6 大通用智能体） ---------- */
 const GENERAL_AGENTS = [
   {
     id: "zhiban",
@@ -111,6 +111,70 @@ const GENERAL_AGENTS = [
     ],
     status: "online",
     trialPath: "/agent/zhishu",
+  },
+  {
+    id: "zhihui",
+    name: "智会AI助理",
+    short: "智会",
+    icon: '<rect x="3" y="6" width="13" height="12" rx="3"/><path d="m16 10 5-3v10l-5-3"/>',
+    tagline: "会议记录与远程协作一体化",
+    desc: "线下沟通用录音记录，远程协作用音视频会议。智会把两种场景整合成同一套通用智能体：现场留声、云端转写整理，也能发起视频会议、共享屏幕、组织讨论。",
+    caps: [
+      "现场沟通录音与转写",
+      "会议纪要自动整理",
+      "远程音视频与屏幕共享",
+      "会议全流程管理（预约、邀请、主持）",
+      "云端会议记录留存与检索",
+      "访谈、客户拜访记录整理",
+    ],
+    status: "online",
+    trialPath: "/agent/zhihui",
+    forms: [
+      {
+        id: "zhijitong",
+        name: "智记通 AI 录音卡",
+        type: "软硬一体",
+        price: 399,
+        unit: "/ 台",
+        priceCaption: "产品定价",
+        priceLabel: "¥399 / 台 · 软硬一体",
+        icon: '<rect x="4" y="2" width="16" height="20" rx="3"/><rect x="10" y="5" width="4" height="7" rx="2"/><path d="M8 10a4 4 0 0 0 8 0m-4 4v3m-3 0h6"/>',
+        tagline: "把现场沟通，变成可回看的工作记录",
+        desc: "面向会议、访谈与客户拜访，用录音卡留存原声，再通过配套 AI 软件整理文字与要点，减少会后反复听录音、手动记笔记的时间。",
+        steps: [
+          ["录下现场沟通", "使用录音卡采集会议或访谈声音，留存原始记录。"],
+          ["整理文字与要点", "通过配套软件转写录音，整理讨论主题和关键内容。"],
+          ["复核并用于工作", "核对姓名、数字与关键结论，再用于纪要或拜访记录。"],
+        ],
+        example: "一次客户拜访结束后，把需求、待确认事项和后续安排整理成记录，方便下一次沟通前回看。",
+        deployment: "录音卡 + 配套 AI 软件",
+        scope: "¥399 / 台为软硬一体产品定价。AI 转写额度、软件服务期限、超额费用和配件清单需在正式销售方案中明确。",
+        boundary: "以上为产品用途介绍。存储容量、续航、收音距离、支持语言与离线处理能力尚待规格确认；不代表无限量或终身免费 AI 服务。",
+      },
+      {
+        id: "jihuitong",
+        name: "极会通视频会议",
+        type: "远程协作",
+        price: 19,
+        unit: "/ 主持人 / 月起",
+        priceCaption: "云端订阅 · 建议价",
+        priceLabel: "建议 ¥19 / 主持人 / 月起",
+        icon: '<rect x="2" y="5" width="13" height="14" rx="3"/><path d="m15 10 7-4v12l-7-4"/>',
+        tagline: "让不同地点的同事，围绕同一件事沟通",
+        desc: "面向远程例会、客户沟通与项目讨论，以音视频会议、屏幕共享和主持管理为核心，让团队看着同一份材料，把问题讲清楚。",
+        steps: [
+          ["约好一场会", "安排时间并邀请同事或客户参加，减少反复协调。"],
+          ["面对面讨论材料", "通过音视频沟通和屏幕共享，演示方案、对齐问题。"],
+          ["有序推进议程", "由主持人组织讨论与发言，把会议时间用在关键事项上。"],
+        ],
+        example: "项目成员分布在不同城市，开会时共享进度材料，逐项确认卡点、负责人和下一步安排。",
+        deployment: "云端订阅，按主持人授权",
+        scope: "建议标准版 ¥19 / 主持人 / 月起。主持人指发起与管理会议的授权账号，不是参会人数；这是拟定定价，尚非正式销售套餐。",
+        boundary: "以上为拟定标准版能力范围。单场人数、会议时长、同时开会场数、云录制空间及终端支持待版本清单确认；AI 纪要和私有化部署按实际适配范围另行评估。",
+        priceNote: "调研日期：2026-09-06。腾讯发布的中国区 App Store 页面列出：腾讯会议会员 1 个月 ¥30，专业版连续包月 ¥88。不同购买渠道与套餐权益可能不同。极会通建议从基础会议协作切入，拟定 ¥19 / 主持人 / 月起，降低小团队的起步成本。这是产品定价建议，需结合带宽、音视频服务成本与会议额度核算，不代表与腾讯会议套餐同等权益。",
+        priceNoteUrl: "https://apps.apple.com/cn/app/id1484048379",
+      },
+    ],
   },
 ];
 
@@ -491,6 +555,20 @@ const AGENT_GUIDES = {
     ],
     "boundary": "结果依赖数据质量与统计口径；自动取数和持续监测需要连接业务系统，原因判断需结合业务验证。"
   },
+  "zhihui": {
+    "audience": "经常参加会议、访谈或远程协作的职场人员",
+    "tagline": "记录会议，也能开会：让沟通留痕、随时复用",
+    "desc": "线下沟通用录音记录，远程协作用音视频会议。智会把两种场景整合成同一套通用智能体：现场留声、云端转写整理，也能发起视频会议、共享屏幕、组织讨论。",
+    "inputs": "现场录音或视频会议内容、参会人员与关注事项。",
+    "outputs": "会议纪要、待办清单，以及可回看的音视频记录与转写文本。",
+    "example": "请把这场客户拜访的录音整理成记录，并列出需要跟进的事项和负责人。",
+    "caps": [
+      "现场录音转写与记录整理",
+      "远程音视频会议与屏幕共享",
+      "会议纪要与待办自动生成"
+    ],
+    "boundary": "现场录音需要配套录音硬件；线上会议的单场人数、时长与云录制空间等按版本另行确认，不代表无限量服务。"
+  },
   "zw-wen": {
     "audience": "机关办公室、公文起草与审核人员",
     "tagline": "辅助公文起草、修改和检查",
@@ -799,7 +877,7 @@ const PRICE_PROFILES = {
   bundle: { monthly: 199, quota: 1500, privatePrice: 29800, label: "行业组合", sources: ["fastgpt", "dify"] },
 };
 const AGENT_PRICE_TIERS = {
-  zhiban: "office", zhiyan: "analysis", zhichuang: "office", zhizhi: "office", zhishu: "analysis",
+  zhiban: "office", zhiyan: "analysis", zhichuang: "office", zhizhi: "office", zhishu: "analysis", zhihui: "office",
   "zw-wen": "office", "zw-yan": "analysis", "zw-fa": "specialist", "zw-zhi": "office",
   "zw-hui": "office", "zw-tong": "office", "zw-ban": "office", "zw-shu": "analysis",
   "zq-fa": "specialist", "zq-biao": "specialist", "zq-fu": "specialist",

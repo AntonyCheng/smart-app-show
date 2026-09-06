@@ -52,6 +52,18 @@
       ${item.boundary?`<p class="detail-boundary">${esc(item.boundary)}</p>`:''}
     </section>
     ${children.length?`<section class="detail-section"><div class="detail-section-title"><h2>选一个助手，开始具体工作</h2><span>${children.length} 个助手</span></div><div class="related-grid">${children.map(a=>`<a href="detail.html?agent=${a.id}"><h3>${esc(a.name)}</h3><p>${esc(a.tagline)}</p><span>单独订阅 ¥${pricingFor(a).monthly}/人/月 · 查看详情 →</span></a>`).join('')}</div></section>`:''}
+    ${item.forms && item.forms.length?`<section class="detail-section" id="forms"><div class="detail-section-title"><h2>两种使用形态，按场景选择</h2><span>${item.forms.length} 种形态</span></div><p class="detail-muted">线下沟通用录音记录，远程协作用音视频会议，两种形态可单独选购。</p>
+      <div class="detail-forms">${item.forms.map(f=>`<article class="detail-form"><div class="detail-form-top"><svg viewBox="0 0 24 24" aria-hidden="true">${f.icon}</svg><div><h3>${esc(f.name)}</h3><p class="tagline">${esc(f.tagline)}</p></div></div>
+        <p class="desc">${esc(f.desc)}</p>
+        <ol class="detail-list">${f.steps.map(s=>`<li><b>${esc(s[0])}</b>：${esc(s[1])}</li>`).join('')}</ol>
+        <p class="detail-example"><b>一个使用场景</b>${esc(f.example)}</p>
+        <p class="plan-label">${esc(f.priceCaption)}</p>
+        <p class="detail-price">¥${f.price}<small>${esc(f.unit)}</small></p>
+        <p class="detail-muted">${esc(f.scope)}</p>
+        <p class="detail-boundary">${esc(f.boundary)}</p>
+        ${f.priceNote?`<details class="detail-disclosure"><summary>定价参考</summary><p>${esc(f.priceNote)}</p>${f.priceNoteUrl?`<p><a href="${esc(f.priceNoteUrl)}" target="_blank" rel="noopener noreferrer">查看官方定价参考 ↗</a></p>`:''}</details>`:''}
+      </article>`).join('')}</div>
+    </section>`:''}
     ${planned?`<section class="detail-section"><h2>拟建设的能力</h2>${list(item.roadmap || [])}<p class="detail-muted">能力与部署适配尚待确认，规划方向不代表现成在售功能。</p></section>`:''}
     ${deployment()}
     ${members.length?`<p class="related-footer">也在这些行业方案中：${members.map(m=>`<a href="detail.html?set=${m.id}">${esc(m.name)} →</a>`).join('')}</p>`:''}`;

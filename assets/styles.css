@@ -739,7 +739,7 @@ body.locked { overflow: hidden; }
 .matrix-group + .matrix-group { margin-top: 12px; }
 .matrix-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
 .matrix-heading h3 { font-size: 15px; }.matrix-heading > span { font-size: 12px; color: var(--text-3); }
-.matrix-general { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 6px; }
+.matrix-general { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }
 .matrix-general .matrix-item { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 10px 0; border: 1px solid transparent; border-radius: 8px; color: var(--text-brand); background: var(--brand-50); cursor: pointer; }
 .matrix-general svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .matrix-general b { font-size: 16px; }.matrix-general span { font-size: 12px; color: var(--text-2); }
@@ -776,8 +776,8 @@ body.locked { overflow: hidden; }
 @media(max-width:1180px) { .hero-inner { grid-template-columns: .8fr 1.2fr; gap: 24px; } #hero-matrix { padding: 18px; }.matrix-industries .matrix-item { padding: 7px; } }
 @media(max-width:900px) { .hero-inner { grid-template-columns: 1fr; }.hero-visual { display: block; }.hero-copy { max-width: 680px; }.lede { max-width: none; } .stats { max-width: 400px; }.quick-path { gap: 10px; }.quick-path a { padding: 16px; } #pricing-modes { grid-template-columns: 1fr; }.price-card { padding: 24px; }.box-models { grid-template-columns: 1fr; } }
 @media(max-width:620px) { .hero-inner { padding-top: 28px; }.hero h1 { font-size: 29px; }.hero-proof { gap: 12px; }.hero-proof li { font-size: 12px; } #hero-matrix { padding: 14px; border-radius: 14px; }.matrix-group { padding: 10px; }.matrix-general { gap: 3px; }.matrix-general span { font-size: 10px; }.matrix-industries { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }.matrix-root h2 { font-size: 21px; }.matrix-index { display: none; }.matrix-base { font-size: 10px; }.quick-path { grid-template-columns: 1fr; gap: 8px; }.quick-path a { padding: 14px 18px; }.quick-path b { font-size: 16px; }.quick-path p { font-size: 12px; }.section { padding-top: 40px; }.box-card { padding: 16px; }.box-model { padding: 16px; }.box-head { flex-wrap: wrap; }.box-head h3 { font-size: 21px; }.box-version { flex-wrap: wrap; }.capacity { padding: 12px; font-size: 14px; }.box-price b { font-size: 23px; }.nav-link { padding: 10px; font-size: 13px; } }
-/* 通用能力一行完整呈现；已上线行业两列并排，避免残留空列。 */
-@media(min-width:1181px) { #general-grid { grid-template-columns: repeat(5,minmax(0,1fr)); } #general-grid .card { padding: 20px; } #general-grid .card-top { flex-wrap: wrap; } }
+/* 通用能力保持三列两行；已上线行业两列并排，避免残留空列。 */
+@media(min-width:1181px) { #general-grid .card { padding: 20px; } #general-grid .card-top { flex-wrap: wrap; } }
 @media(min-width:621px) { #industry-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 /* 用户反馈修订：三列宽卡片，统一图标和标题结构。 */
 #general-grid { grid-template-columns: repeat(3,minmax(0,1fr)); align-items: stretch; }
@@ -816,24 +816,12 @@ body.locked { overflow: hidden; }
 @media(max-width:1000px) { .employee-line-card { padding: 20px; }.employee-line-title { align-items: flex-start; flex-direction: column; }.employee-line-title h3 { font-size: 19px; }.employee-feature-head { flex-wrap: wrap; } }
 @media(max-width:700px) { .employee-line-grid { grid-template-columns: 1fr; }.employee-line-title { flex-direction: row; align-items: center; }.employee-difference { flex-direction: column; align-items: flex-start; gap: 12px; }.employee-difference > span { display: none; }.employee-difference a { margin-left: 0; }.matrix-workforce { flex-wrap: wrap; gap: 8px; }.matrix-workforce > div:last-child { width: 100%; }.matrix-workforce a { flex: 1; justify-content: center; }.employee-feature-head { gap: 12px; } }
 @media(max-width:900px) { .employee-line-grid { grid-template-columns: 1fr; }.employee-line-title { flex-direction: row; align-items: center; }.employee-line-card { padding: 24px; }.employee-line-card:first-child { padding-top: 22px; }.employee-difference { flex-wrap: wrap; }.employee-difference a { margin-left: 0; } }
-/* 会议产品加入矩阵；行业保留全部入口，用两行标签收敛面积。 */
+/* 行业保留全部入口，用两行标签收敛面积。 */
 .matrix-industries { grid-template-columns: repeat(6,minmax(0,1fr)); gap: 6px; }
 .matrix-industries .matrix-item { display: flex; align-items: center; justify-content: center; min-height: 40px; padding: 5px; }
 .matrix-industries b { font-size: 14px; }
 .industry-matrix .matrix-heading > span { font-size: 10px; }
-.matrix-meetings { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--brand-100); border-radius: 12px; background: #fff; }
-.matrix-meetings h3 { font-size: 15px; margin-bottom: 8px; }
-.matrix-meetings > div { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.matrix-meetings a { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 10px; border-radius: 8px; background: var(--surface-2); }
-.matrix-meetings a:hover { background: var(--brand-50); }
-.matrix-meetings svg, .meeting-symbol svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; color: var(--text-brand); }
-.matrix-meetings b { display: block; font-size: 13px; }.matrix-meetings small { display: block; font-size: 10px; color: var(--text-3); margin-top: 3px; }.matrix-meetings a > span:last-child { margin-left: auto; color: var(--text-brand); }
-.meeting-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
-.meeting-card { display: flex; flex-direction: column; gap: 16px; padding: 30px; border: 1px solid var(--border); border-radius: 16px; background: #fff; }
-.meeting-card-top { display: flex; align-items: center; justify-content: space-between; }.meeting-symbol { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 14px; background: var(--brand-50); }.meeting-card h3 { font-size: 25px; }.meeting-promise { font-size: 17px; font-weight: 600; }.meeting-description { font-size: 14px; line-height: 1.9; color: var(--text-2); }.meeting-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }.meeting-tags span { padding: 4px 9px; border-radius: 5px; background: var(--surface-2); font-size: 12px; color: var(--text-3); }
-.meeting-card-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 18px; border-top: 1px solid var(--border); }.meeting-card-foot span { font-size: 12px; color: var(--text-3); }.meeting-card-foot p { font-size: 12px; color: var(--text-2); }.meeting-card-foot b { color: var(--text-brand); font-size: 30px; }.meeting-card-foot .btn { font-size: 13px; padding: 10px 14px; }
-@media(max-width:700px) { .meeting-grid { grid-template-columns: 1fr; }.meeting-card { padding: 24px; }.matrix-meetings a { padding: 8px; }.matrix-meetings svg { display: none; }.matrix-meetings a > span:last-child { display: none; } }
-@media(max-width:420px) { .matrix-industries { grid-template-columns: repeat(4,minmax(0,1fr)); }.industry-matrix .matrix-heading { flex-wrap: wrap; gap: 2px; }.matrix-meetings b { font-size: 12px; } }
+@media(max-width:420px) { .matrix-industries { grid-template-columns: repeat(4,minmax(0,1fr)); }.industry-matrix .matrix-heading { flex-wrap: wrap; gap: 2px; } }
 /* 首屏比例：桌面矩阵收紧留白，与左侧文案居中对齐。 */
 @media (min-width:901px) {
   .hero-inner { grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 44px; padding-top: 36px; }
@@ -855,11 +843,6 @@ body.locked { overflow: hidden; }
   .matrix-general b { font-size: 14px; }
   .matrix-general span { font-size: 11px; }
   .matrix-industries .matrix-item { min-height: 32px; padding: 4px; }
-  .matrix-meetings { margin-top: 8px; padding: 9px 12px; }
-  .matrix-meetings h3 { margin-bottom: 6px; }
-  .matrix-meetings a { padding: 7px; gap: 6px; }
-  .matrix-meetings svg { width: 20px; height: 20px; }
-  .matrix-meetings a > span:last-child { display: none; }
   .matrix-base { margin-top: 10px; font-size: 11px; }
   .hero-legend { margin-top: 8px; font-size: 11px; }
 }
