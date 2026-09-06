@@ -1,0 +1,38 @@
+/* 产品详情：标准文档流，无遮罩和内部滚动容器。 */
+.detail-page { background: #fff; }
+.detail-main { max-width: 1120px; padding-bottom: 32px; }
+.breadcrumbs { display: flex; flex-wrap: wrap; gap: 10px; color: var(--text-3); font-size: 13px; padding: 26px 0; }
+.breadcrumbs a:hover, .related-footer a:hover { color: var(--text-brand); text-decoration: underline; }
+.detail-heading { display: grid; grid-template-columns: minmax(0,1fr) 280px; gap: 64px; padding: 20px 0 40px; border-bottom: 1px solid var(--border); }
+.detail-heading h1 { font-size: clamp(28px,3vw,40px); line-height: 1.3; margin: 14px 0 12px; letter-spacing: -.6px; }
+.detail-tagline { font-size: 21px; font-weight: 600; line-height: 1.5; color: var(--text-1); }
+.detail-description { font-size: 16px; color: var(--text-2); line-height: 1.9; margin-top: 14px; max-width: 660px; }
+.detail-summary { display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 24px; border: 1px solid var(--brand-200); border-radius: 12px; background: var(--brand-50); }
+.detail-summary > span { font-size: 13px; color: var(--text-3); }
+.detail-summary strong { font-size: 38px; color: var(--text-brand); line-height: 1.3; }
+.detail-summary strong small { display: block; font-size: 13px; font-weight: 400; color: var(--text-2); margin-top: 5px; }
+.detail-summary .btn { border-radius: 8px; }
+.detail-trial, .trial-pending { text-align: center; font-size: 13px; }
+.detail-trial { color: var(--text-brand); text-decoration: underline; }
+.detail-section { padding-top: 38px; scroll-margin-top: 88px; }
+.detail-section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 18px; }
+.detail-section h2 { font-size: 24px; line-height: 1.5; }.detail-section-title > span { color: var(--text-3); font-size: 13px; }
+.detail-audience { font-size: 15px; color: var(--text-2); line-height: 1.8; }.detail-audience b { color: var(--text-1); margin-right: 16px; }
+.capability-strip { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; margin: 20px 0; }
+.capability-strip > div { padding: 18px 0; border-top: 2px solid var(--brand-100); }.capability-strip span { color: var(--text-brand); font-size: 12px; font-weight: 700; }.capability-strip h3 { font-size: 17px; line-height: 1.6; margin-top: 8px; }
+.usage-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 22px; }
+.usage-steps { display: grid; gap: 20px; }.usage-steps span { font-size: 13px; font-weight: 700; color: var(--text-brand); }.usage-steps p { font-size: 15px; color: var(--text-2); line-height: 1.85; margin-top: 4px; }
+.detail-example { padding: 22px 24px; background: var(--surface-2); border-radius: 10px; }.detail-example b { color: var(--text-1); font-size: 13px; }.detail-example p { font-size: 16px; color: var(--text-2); line-height: 1.85; margin-top: 10px; }
+.detail-boundary, .detail-muted { color: var(--text-3); font-size: 13px; line-height: 1.85; }.detail-boundary { margin-top: 20px; }
+.detail-plans { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; margin: 22px 0; }
+.detail-plan { display: flex; flex-direction: column; gap: 16px; padding: 24px; border: 1px solid var(--border); border-radius: 12px; }.detail-plan.recommended { border-color: var(--brand-300); }.detail-plan h3 { font-size: 21px; }.detail-plan > p:not(.detail-price):not(.plan-label) { font-size: 14px; line-height: 1.7; color: var(--text-2); }
+.detail-price { color: var(--text-brand); font-size: clamp(27px,2.3vw,34px); font-weight: 750; line-height: 1.3; }.detail-price small { font-weight: 400; font-size: 13px; color: var(--text-3); display: block; margin-top: 5px; }
+.detail-list { display: grid; gap: 10px; padding: 0; margin: 0; list-style: none; }.detail-list li { position: relative; padding-left: 14px; font-size: 14px; line-height: 1.75; color: var(--text-2); }.detail-list li:before { content: ''; width: 4px; height: 4px; background: var(--text-brand); border-radius: 50%; position: absolute; top: 10px; left: 0; }
+.plan-bottom { border-top: 1px solid var(--border); padding-top: 16px; margin-top: auto; font-size: 13px; line-height: 1.75; color: var(--text-3); }a.plan-bottom { color: var(--text-brand); text-decoration: underline; }
+.detail-disclosure { border-bottom: 1px solid var(--border); scroll-margin-top: 88px; }.detail-disclosure summary { padding: 18px 0; min-height: 54px; font-size: 15px; font-weight: 600; cursor: pointer; }.detail-disclosure > p { font-size: 14px; color: var(--text-2); line-height: 1.9; margin: 0 0 18px; }
+.source-list, .hardware-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; margin-bottom: 20px; }.source-list article, .hardware-grid article { padding: 20px; background: var(--surface-2); border-radius: 8px; }.source-list a { color: var(--text-brand); text-decoration: underline; }.source-list b { display: block; font-size: 14px; margin: 10px 0; }.source-list p, .hardware-grid p { font-size: 13px; line-height: 1.8; color: var(--text-2); }.hardware-grid h3 { font-size: 18px; margin-bottom: 12px; }
+.related-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }.related-grid a { display: block; padding: 20px; border: 1px solid var(--border); border-radius: 8px; }.related-grid a:hover { border-color: var(--brand-300); background: var(--brand-50); }.related-grid h3 { font-size: 17px; }.related-grid p { font-size: 14px; color: var(--text-2); margin-top: 8px; }.related-grid span { display: block; font-size: 12px; color: var(--text-brand); margin-top: 14px; }
+.related-footer { margin-top: 30px; font-size: 14px; line-height: 2; color: var(--text-3); }.related-footer a { color: var(--text-brand); margin-right: 16px; }
+.planned-note { background: var(--surface-2); border-radius: 10px; padding: 24px; }.planned-note h3 { font-size: 19px; }.planned-note p { color: var(--text-2); margin: 12px 0 18px; line-height: 1.8; }.planned-note a { color: var(--text-brand); }
+@media(max-width:900px) { .detail-heading { gap: 28px; grid-template-columns: minmax(0,1fr) 250px; }.detail-plan { padding: 18px; }.detail-plans { gap: 12px; } }
+@media(max-width:700px) { .detail-heading, .detail-plans, .usage-layout, .source-list, .hardware-grid { grid-template-columns: 1fr; }.detail-heading { gap: 22px; padding-top: 4px; }.detail-summary { gap: 12px; }.detail-summary strong { font-size: 32px; }.detail-summary strong small { display: inline; margin-left: 8px; }.capability-strip { gap: 12px; }.capability-strip h3 { font-size: 15px; }.detail-section-title { flex-wrap: wrap; gap: 4px; }.detail-section h2 { font-size: 22px; }.detail-tagline { font-size: 19px; }.detail-description { font-size: 15px; }.detail-plan { padding: 22px; }.related-grid { grid-template-columns: 1fr; }.detail-main { padding-bottom: 0; } }
