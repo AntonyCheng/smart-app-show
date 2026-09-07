@@ -39,7 +39,7 @@ const GENERAL_AGENTS = [
       "跨部门协同提醒",
     ],
     status: "online",
-    trialPath: "/agent/zhiban",
+    trialPath: "https://meeting.openxlab.cn",
   },
   {
     id: "zhiyan",
@@ -57,7 +57,7 @@ const GENERAL_AGENTS = [
       "决策参考材料生成",
     ],
     status: "online",
-    trialPath: "/agent/zhiyan",
+    trialPath: "http://60.205.157.106:7168/",
   },
   {
     id: "zhichuang",
@@ -74,7 +74,7 @@ const GENERAL_AGENTS = [
       "长文摘要与要点提炼",
     ],
     status: "online",
-    trialPath: "/agent/zhichuang",
+    trialPath: "http://60.205.157.106:7171/",
   },
   {
     id: "zhizhi",
@@ -92,7 +92,7 @@ const GENERAL_AGENTS = [
       "新人上岗业务辅导",
     ],
     status: "online",
-    trialPath: "/agent/zhizhi",
+    trialPath: "http://60.205.157.106:7166/",
   },
   {
     id: "zhishu",
@@ -110,7 +110,7 @@ const GENERAL_AGENTS = [
       "趋势研判与决策建议",
     ],
     status: "online",
-    trialPath: "/agent/zhishu",
+    trialPath: "http://60.205.157.106:7181/",
   },
   {
     id: "zhihui",
@@ -128,7 +128,7 @@ const GENERAL_AGENTS = [
       "访谈、客户拜访记录整理",
     ],
     status: "online",
-    trialPath: "/agent/zhihui",
+    trialPath: "https://www.deepnote.cn",
     forms: [
       {
         id: "zhijitong",
