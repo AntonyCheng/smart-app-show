@@ -1,0 +1,29 @@
+# 智域 · 智系列智能体展示中心 —— 静态站容器编排
+# 启动：docker compose up -d   访问：http://<宿主机IP>:7182
+name: smart-app-show
+
+services:
+  web:
+    # 本地已有 nginx:alpine 镜像，无需 build、无需拉取
+    image: nginx:alpine
+    container_name: smart-app-show-web
+    ports:
+      - "7182:80"
+    volumes:
+      # 站点为纯静态文件（全部相对路径引用），直接只读挂载到 nginx 默认站点目录
+      # 改动 index.html / assets 后刷新页面即时生效，无需重建容器
+      - ./:/usr/share/nginx/html:ro
+    restart: unless-stopped
+    # 复用默认 docker0 网桥，不为本项目创建新网络（默认地址池分配器有历史残留，见上）
+    network_mode: bridge
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+# 说明：本项目不创建专属网络（默认地址池分配器因历史残留误报耗尽），
+# 通过 network_mode: bridge 复用宿主机已有 docker0 网桥。
