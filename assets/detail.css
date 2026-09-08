@@ -14,6 +14,8 @@
 .detail-summary .btn { border-radius: 8px; }
 .detail-trial, .trial-pending { text-align: center; font-size: 13px; }
 .detail-trial { color: var(--text-brand); text-decoration: underline; }
+/* 虚拟数字人详情：信息框不放价格，改放所属行业，字号收窄避免长文本溢出。 */
+.human-summary strong { font-size: 24px; }
 .detail-section { padding-top: 38px; scroll-margin-top: 88px; }
 .detail-section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 18px; }
 .detail-section h2 { font-size: 24px; line-height: 1.5; }.detail-section-title > span { color: var(--text-3); font-size: 13px; }

@@ -7,7 +7,7 @@
   const item = isSet ? findSet(params.get('set')) : findAgent(params.get('agent'));
   const host = document.querySelector('#detail-main');
   if (!item) {
-    document.title = '未找到智能体 · 智域';
+    document.title = '未找到智能体 · 龙江智域';
     host.innerHTML = '<section class="detail-heading"><h1>没有找到这个智能体</h1><p>链接可能不完整，请返回产品列表重新选择。</p><a class="btn btn-red" href="index.html#general">查看全部智能体</a></section>';
     return;
   }
@@ -20,7 +20,7 @@
   const list = values => `<ul class="detail-list">${values.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`;
   const trial = trialUrlOf(item);
   const trialReady = !planned && /^https?:\/\//.test(trial) && !new URL(trial).hostname.endsWith('example.com');
-  document.title = name + (SITE.showPricing ? ' · 用途、部署与价格 · 智域' : ' · 用途与部署 · 智域');
+  document.title = name + (SITE.showPricing ? ' · 用途、部署与价格 · 龙江智域' : ' · 用途与部署 · 龙江智域');
   function deployment() {
     if (planned) return `<section id="deployment" class="detail-section"><div class="detail-section-title"><h2>部署与价格</h2><span>尚未开放订购</span></div><div class="planned-note"><h3>方案规划中，暂不报价</h3><p>拟支持云端、私有化和智立方一体机。具体能力、适配范围与交付费用将在方案确认后公布。</p><a href="index.html#industry">先查看已上线的行业方案 →</a></div></section>`;
     if (!SITE.showPricing) return `<section id="deployment" class="detail-section"><div class="detail-section-title"><h2>部署方式</h2><span>产品展示阶段</span></div><p class="detail-muted">支持云端订阅、私有化部署与智立方一体机三种方式，当前页面为产品功能展示，具体价格与套餐范围暂未公开。</p></section>`;
@@ -32,7 +32,7 @@
           <p class="plan-bottom">云端处理资料，敏感数据请先按单位要求评估。</p></article>
         <article class="detail-plan"><p class="plan-label">已有服务器</p><h3>私有化部署</h3><p class="detail-price">${money(price.privatePrice)}<small>/ 套起</small></p><p>在自有服务器或专属环境中运行。</p>
           ${list([isSet?'标准平台 + 本产品集的助手':'标准平台 + 当前智能体', '基础部署、使用培训', '首年基础维护', '不含服务器、复杂系统对接与数据整理'])}
-          <p class="plan-bottom">已有智域平台可复用底座，新增助手按适配范围报价。</p></article>
+          <p class="plan-bottom">已有龙江智域平台可复用底座，新增助手按适配范围报价。</p></article>
         <article class="detail-plan"><p class="plan-label">需要本地算力</p><h3>智立方一体机</h3><p class="detail-price">¥39,800<small>/ 台起</small></p><p>硬件、软件与基础部署一起交付。</p>
           ${list(['Lite ¥39,800；Pro ¥59,800',isSet?'包含标准平台与本产品集助手':'包含标准平台与当前智能体','本地模型与知识库','云端检索、语音、文件导出等按适配范围配置'])}
           <a class="plan-bottom" href="#hardware">查看两款配置与使用人数 ↓</a></article>

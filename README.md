@@ -1,4 +1,4 @@
-# 智域 · 智系列智能体展示中心
+# 龙江智域 · 智系列智能体展示中心
 
 无构建、无外部运行依赖的静态产品站。直接打开 index.html，或运行 `python3 -m http.server 8000`，访问 http://127.0.0.1:8000。
 
@@ -51,3 +51,10 @@ SITE.trialBase 仍为原占位地址 https://ai-trial.example.com。详情页检
 完整产品依据、竞品价格、建议价与实施边界见 docs/digital-employees.md。
 
 会议与记录（原智记通、极会通）已合并为第 6 个通用智能体「智会」，详情页 `detail.html?agent=zhihui` 以"两种使用形态"展示录音卡与视频会议两条内容，不再单独设 products.html。定价依据见 [docs/meeting-products.md](docs/meeting-products.md)。
+
+## 虚拟数字人场景（2026-09-08）
+
+第四个产品维度，与数字员工、通用智能体、行业智能体并列，首页 `#humans` 板块展示 10 张场景卡片，独立详情为 `humans.html?id=daoban` 等。
+覆盖金融、零售、教育、政务、交通、会展、酒店、工业、康养、招聘十大行业，仅做能力与场景介绍，不接入试用系统，不参与 SITE.showPricing 报价开关。
+数据在 `assets/humans-data.js`（`DIGITAL_HUMANS`），渲染在 `assets/humans.js`，复用 `assets/styles.css` 的卡片组件与 `assets/detail.css` 的详情页排版，无需新增独立样式表。
+部署需一并上传 humans.html 及 assets/humans-data.js、assets/humans.js。

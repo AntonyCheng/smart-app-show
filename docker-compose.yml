@@ -1,4 +1,4 @@
-# 智域 · 智系列智能体展示中心 —— 静态站容器编排
+# 龙江智域 · 智系列智能体展示中心 —— 静态站容器编排
 # 启动：docker compose up -d   访问：http://<宿主机IP>:7182
 name: smart-app-show
 

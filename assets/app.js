@@ -1,5 +1,5 @@
 /* =============================================================
- * 智域 · 智能体展示中心 —— 渲染与交互（纯前端，无依赖）
+ * 龙江智域 · 智能体展示中心 —— 渲染与交互（纯前端，无依赖）
  * ============================================================= */
 (function () {
   "use strict";
@@ -26,6 +26,7 @@
       { n: EMPLOYEE_LINES.length, t: "数字员工产品线" },
       { n: STATS.general, t: "通用智能体" },
       { n: STATS.sets, t: "行业智能体分类" },
+      { n: DIGITAL_HUMANS.length, t: "虚拟数字人场景" },
     ];
     $("#stats").innerHTML = items
       .map((i) => `<div class="stat"><b>${i.n}</b><span>${esc(i.t)}</span></div>`)
@@ -43,6 +44,8 @@
         <div class="matrix-general">${ALL_GENERAL.map((a,i)=>`<a class="matrix-item" href="detail.html?agent=${a.id}"><svg viewBox="0 0 24 24" aria-hidden="true">${a.icon}</svg><b>${esc(a.short)}</b><span>${uses[i] || "通用能力"}</span></a>`).join("")}</div></section>
       <section class="matrix-group industry-matrix"><div class="matrix-heading"><h3>行业智能体</h3><span>智政、智企已上线 · 其余规划中</span></div>
         <div class="matrix-industries">${INDUSTRY_SETS.map(st=>`<a href="detail.html?set=${st.id}" class="matrix-item ${st.status === "plan" ? "is-planned" : "is-online"}"><b>${esc(st.name)}</b><span class="sr-only">${esc(st.domains[0])} · ${st.status === "plan" ? "规划中" : "已上线"}</span></a>`).join("")}</div></section>
+      <section class="matrix-group matrix-humans-group"><div class="matrix-heading"><h3>虚拟数字人</h3><span>${DIGITAL_HUMANS.length} 大场景 · 能力展示</span></div>
+        <div class="matrix-humans">${DIGITAL_HUMANS.map(h=>`<a href="humans.html?id=${h.id}" class="matrix-item"><b>${esc(h.short)}</b><span class="sr-only">${esc(h.industry)}</span></a>`).join("")}</div></section>
       <div class="matrix-base">统一能力底座 <span>知识库 / 工作流 / 模型服务</span></div>`;
   }
 
@@ -130,6 +133,35 @@
       </a>`;
   }
 
+  /* ---------------- 虚拟数字人卡片（纯场景展示，无价格/试用） ---------------- */
+  function humanCard(h) {
+    const caps = (h.caps || []).slice(0, 3);
+    const more = (h.caps || []).length - caps.length;
+    return `
+      <a class="card reveal" href="humans.html?id=${h.id}" data-human="${h.id}">
+        <div class="card-top">
+          <span class="card-illu" aria-hidden="true"><svg viewBox="0 0 24 24">${h.icon}</svg></span>
+          <div>
+            <h3>${esc(h.name)}</h3>
+            <p class="tagline">${esc(h.tagline)}</p>
+          </div>
+        </div>
+        <p class="desc">${esc(h.desc)}</p>
+        <div class="cap-list">
+          ${caps.map((c) => `<span class="cap">${esc(c)}</span>`).join("")}
+          ${more > 0 ? `<span class="cap cap-more">+${more}</span>` : ""}
+        </div>
+        <div class="card-foot">
+          <span class="domain">${esc(h.industry)}</span>
+          <span class="card-cta">查看详情 ${ARROW_SVG}</span>
+        </div>
+      </a>`;
+  }
+  function renderHumans() {
+    $("#humans-grid").innerHTML = DIGITAL_HUMANS.map(humanCard).join("");
+    setText("#count-humans", `共 <b>${DIGITAL_HUMANS.length}</b> 个虚拟数字人场景 · 能力与场景展示`);
+  }
+
   function renderGrids() {
     $("#general-grid").innerHTML = ALL_GENERAL.map((a) => agentCard(a, "g")).join("");
     $("#industry-grid").innerHTML = INDUSTRY_SETS.map(setCard).join("");
@@ -180,29 +212,47 @@
     }
   }
 
-  /* ---------------- 导航当前位置高亮（scroll-spy） ---------------- */
+  /* ---------------- 导航当前位置高亮（scroll-spy） ----------------
+   * 用"板块顶部是否已经滚过判定线"来判定高亮，判定线的位置直接从 CSS 读：
+   * html 的 scroll-padding-top 和 .section 的 scroll-margin-top 是叠加关系
+   * （不是取较大值），锚点跳转会让板块顶部正好停在两者之和这条线上；判定线
+   * 必须盖过这条线，否则刚跳转过去板块顶部还没"到线"，会被误判成上一个板块
+   * （例如点击"虚拟数字人"后高亮仍停在"行业智能体"）。用 getComputedStyle 现读
+   * 这两个值，比硬编码一个像素数更不容易因为断点变化、样式调整而再次跑偏。 */
   function bindNavSpy() {
     const links = $$(".nav-link");
     const map = {};
     links.forEach((l) => { map[l.getAttribute("href").slice(1)] = l; });
     const sections = Object.keys(map).map((id) => document.getElementById(id)).filter(Boolean);
-    if (!("IntersectionObserver" in window) || !sections.length) return;
-    const visible = {};
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((en) => { visible[en.target.id] = en.isIntersecting ? en.intersectionRatio : 0; });
-        let best = null, bestRatio = 0;
-        sections.forEach((s) => {
-          const r = visible[s.id] || 0;
-          if (r > bestRatio) { bestRatio = r; best = s.id; }
-        });
-        links.forEach((l) => l.classList.remove("is-active"));
-        if (best) { map[best].classList.add("is-active"); map[best].setAttribute("aria-current", "true"); }
-        links.forEach((l) => { if (!l.classList.contains("is-active")) l.removeAttribute("aria-current"); });
-      },
-      { rootMargin: "-84px 0px -55% 0px", threshold: [0, .15, .35, .6, 1] }
-    );
-    sections.forEach((s) => io.observe(s));
+    if (!sections.length) return;
+    const lastId = sections[sections.length - 1].id;
+
+    function setActive(id) {
+      links.forEach((l) => l.classList.remove("is-active"));
+      if (id && map[id]) { map[id].classList.add("is-active"); map[id].setAttribute("aria-current", "true"); }
+      links.forEach((l) => { if (!l.classList.contains("is-active")) l.removeAttribute("aria-current"); });
+    }
+
+    function activateLine() {
+      const rootPad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+      const sectionMargin = parseFloat(getComputedStyle(sections[0]).scrollMarginTop) || 0;
+      return rootPad + sectionMargin + 12; // 加一点缓冲，避免刚好卡在临界像素上。
+    }
+
+    function updateActive() {
+      const line = activateLine();
+      let current = null;
+      sections.forEach((s) => { if (s.getBoundingClientRect().top <= line) current = s.id; });
+      // 已经滚到页面底部时，最后一个板块可能撑不满判定线以下的空间，直接判它高亮。
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = lastId;
+      setActive(current);
+    }
+
+    // 点击导航链接时立即高亮目标项，不等锚点跳转的滚动过程结束。
+    links.forEach((l) => l.addEventListener("click", () => setActive(l.getAttribute("href").slice(1))));
+    window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive);
+    updateActive();
   }
 
   /* ---------------- 事件绑定 ---------------- */
@@ -223,6 +273,7 @@
   renderStats();
   renderHeroVisual();
   renderGrids();
+  renderHumans();
   bindGlobal();
   bindNavSpy();
   applyFilter();

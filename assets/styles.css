@@ -723,7 +723,7 @@ body.locked { overflow: hidden; }
   .box-row.box-th { display: none; }
 }
 
-/* 智域选型页：品牌矩阵、方案比较与容量说明 */
+/* 龙江智域选型页：品牌矩阵、方案比较与容量说明 */
 .hero-inner { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 36px; padding-top: 48px; padding-bottom: 28px; }
 .hero h1 { font-size: clamp(28px, 3vw, 42px); line-height: 1.35; }
 .hero-copy { align-self: center; }
@@ -776,16 +776,16 @@ body.locked { overflow: hidden; }
 @media(max-width:1180px) { .hero-inner { grid-template-columns: .8fr 1.2fr; gap: 24px; } #hero-matrix { padding: 18px; }.matrix-industries .matrix-item { padding: 7px; } }
 @media(max-width:900px) { .hero-inner { grid-template-columns: 1fr; }.hero-visual { display: block; }.hero-copy { max-width: 680px; }.lede { max-width: none; } .stats { max-width: 400px; }.quick-path { gap: 10px; }.quick-path a { padding: 16px; } #pricing-modes { grid-template-columns: 1fr; }.price-card { padding: 24px; }.box-models { grid-template-columns: 1fr; } }
 @media(max-width:620px) { .hero-inner { padding-top: 28px; }.hero h1 { font-size: 29px; }.hero-proof { gap: 12px; }.hero-proof li { font-size: 12px; } #hero-matrix { padding: 14px; border-radius: 14px; }.matrix-group { padding: 10px; }.matrix-general { gap: 3px; }.matrix-general span { font-size: 10px; }.matrix-industries { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }.matrix-root h2 { font-size: 21px; }.matrix-index { display: none; }.matrix-base { font-size: 10px; }.quick-path { grid-template-columns: 1fr; gap: 8px; }.quick-path a { padding: 14px 18px; }.quick-path b { font-size: 16px; }.quick-path p { font-size: 12px; }.section { padding-top: 40px; }.box-card { padding: 16px; }.box-model { padding: 16px; }.box-head { flex-wrap: wrap; }.box-head h3 { font-size: 21px; }.box-version { flex-wrap: wrap; }.capacity { padding: 12px; font-size: 14px; }.box-price b { font-size: 23px; }.nav-link { padding: 10px; font-size: 13px; } }
-/* 通用能力保持三列两行；已上线行业两列并排，避免残留空列。 */
-@media(min-width:1181px) { #general-grid .card { padding: 20px; } #general-grid .card-top { flex-wrap: wrap; } }
+/* 通用能力保持三列两行；已上线行业两列并排，避免残留空列。虚拟数字人复用同一套卡片布局。 */
+@media(min-width:1181px) { #general-grid .card, #humans-grid .card { padding: 20px; } #general-grid .card-top, #humans-grid .card-top { flex-wrap: wrap; } }
 @media(min-width:621px) { #industry-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 /* 用户反馈修订：三列宽卡片，统一图标和标题结构。 */
-#general-grid { grid-template-columns: repeat(3,minmax(0,1fr)); align-items: stretch; }
-#general-grid .card { padding: 24px; }
-#general-grid .card-top { display: grid; grid-template-columns: 48px minmax(0,1fr); align-items: center; gap: 14px; }
-#general-grid .desc { flex: none; }
-#general-grid .cap-list { margin-top: auto; }
-#general-grid .card-foot { margin-top: 0; flex-wrap: wrap; gap: 10px; }
+#general-grid, #humans-grid { grid-template-columns: repeat(3,minmax(0,1fr)); align-items: stretch; }
+#general-grid .card, #humans-grid .card { padding: 24px; }
+#general-grid .card-top, #humans-grid .card-top { display: grid; grid-template-columns: 48px minmax(0,1fr); align-items: center; gap: 14px; }
+#general-grid .desc, #humans-grid .desc { flex: none; }
+#general-grid .cap-list, #humans-grid .cap-list { margin-top: auto; }
+#general-grid .card-foot, #humans-grid .card-foot { margin-top: 0; flex-wrap: wrap; gap: 10px; }
 .badge { white-space: nowrap; flex-shrink: 0; }
 .capacity { grid-template-columns: 1fr; gap: 8px; }
 .capacity strong { text-align: left; }
@@ -797,8 +797,8 @@ body.locked { overflow: hidden; }
 .usage-example { margin-top: 20px; padding: 18px 20px; background: var(--brand-50); border-left: 3px solid var(--brand-600); border-radius: 8px; }
 .usage-example b { color: var(--text-brand); font-size: 13px; }.usage-example p { margin-top: 8px; font-size: 15px; color: var(--text-2); line-height: 1.7; }
 .usage-boundary { margin-top: 16px; font-size: 13px; line-height: 1.75; color: var(--text-3); }.usage-boundary b { display: block; margin-bottom: 4px; }
-@media(max-width:1000px) { #general-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
-@media(max-width:620px) { #general-grid { grid-template-columns: 1fr; } .usage-facts > div { grid-template-columns: 1fr; gap: 4px; } }
+@media(max-width:1000px) { #general-grid, #humans-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:620px) { #general-grid, #humans-grid { grid-template-columns: 1fr; } .usage-facts > div { grid-template-columns: 1fr; gap: 4px; } }
 .card-price { margin-top: auto; font-size: 13px; color: var(--text-3); }
 .card-price b { font-size: 18px; color: var(--text-brand); }
 .selection-note { padding-bottom: 36px; }
@@ -826,6 +826,13 @@ body.locked { overflow: hidden; }
 .matrix-industries b { font-size: 14px; }
 .industry-matrix .matrix-heading > span { font-size: 10px; }
 @media(max-width:420px) { .matrix-industries { grid-template-columns: repeat(4,minmax(0,1fr)); }.industry-matrix .matrix-heading { flex-wrap: wrap; gap: 2px; } }
+/* 虚拟数字人：10 个场景两行五列展示为短名格子，纯能力介绍，不带价格/试用角标。 */
+.matrix-humans { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 6px; }
+.matrix-humans .matrix-item { display: flex; align-items: center; justify-content: center; min-height: 40px; padding: 5px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); color: var(--text-1); cursor: pointer; }
+.matrix-humans .matrix-item b { font-size: 14px; }
+.matrix-humans .matrix-item:hover { border-color: var(--brand-600); background: var(--brand-100); }
+.matrix-humans-group .matrix-heading > span { font-size: 10px; }
+@media(max-width:420px) { .matrix-humans { grid-template-columns: repeat(4,minmax(0,1fr)); } }
 /* 首屏比例：桌面矩阵收紧留白，与左侧文案居中对齐。 */
 @media (min-width:901px) {
   .hero-inner { grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 44px; padding-top: 36px; }
@@ -847,6 +854,7 @@ body.locked { overflow: hidden; }
   .matrix-general b { font-size: 14px; }
   .matrix-general span { font-size: 11px; }
   .matrix-industries .matrix-item { min-height: 32px; padding: 4px; }
+  .matrix-humans .matrix-item { min-height: 32px; padding: 4px; }
   .matrix-base { margin-top: 10px; font-size: 11px; }
   .hero-legend { margin-top: 8px; font-size: 11px; }
 }

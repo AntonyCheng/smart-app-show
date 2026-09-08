@@ -4,13 +4,13 @@
   const requested = new URLSearchParams(location.search).get('line') || 'enterprise';
   const line = EMPLOYEE_LINES.find(l=>l.id===requested);
   const host = document.querySelector('#employee-main');
-  if (!line) { document.title='未找到产品线 · 智域'; host.innerHTML='<section class="detail-heading"><div><h1>没有找到这条产品线</h1><a class="btn btn-red" href="index.html#employees">返回数字员工总览</a></div></section>'; return; }
+  if (!line) { document.title='未找到产品线 · 龙江智域'; host.innerHTML='<section class="detail-heading"><div><h1>没有找到这条产品线</h1><a class="btn btn-red" href="index.html#employees">返回数字员工总览</a></div></section>'; return; }
   const money = n => '¥' + n.toLocaleString('zh-CN');
   const list = xs => `<ul class="detail-list">${xs.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
   const isEnterprise = line.id==='enterprise';
   const trial = trialUrlOf(line);
   const trialReady = /^https?:\/\//.test(trial) && !new URL(trial).hostname.endsWith('example.com');
-  document.title='数字员工（'+line.name+'）· 岗位与部署 · 智域';
+  document.title='数字员工（'+line.name+'）· 岗位与部署 · 龙江智域';
   const roleCard = (r,i)=>`<details class="employee-role"><summary><span class="role-number">${String(i+1).padStart(2,'0')}</span><div><h3>${esc(r.name)}</h3><p>${esc(r.desc)}</p></div><span class="role-expand" aria-hidden="true">＋</span></summary><div class="employee-role-body">${r.tasks?list(r.tasks):''}${r.inputs?`<p><b>需要提供</b>${esc(r.inputs)}</p>`:''}<p><b>交付结果</b>${esc(r.outputs)}</p></div></details>`;
   // 部署与价格区块：项目当前为产品展示，SITE.showPricing=false 时用中性说明替代完整报价内容；改回 true 即可恢复。
   const deploymentSection = !SITE.showPricing
@@ -19,7 +19,7 @@
     <div class="detail-plans">
       <article class="detail-plan ${isEnterprise?'recommended':''}"><span class="plan-label">${isEnterprise?'小团队起步':'轻量试点'}</span><h3>${isEnterprise?'企业云端入门':'专属云方案'}</h3><p class="detail-price">${line.cloud?money(line.cloud):'按场景评估'}<small>${line.cloud?'/ 月 · 年度预算 ¥5,988':'确认数据与接入要求后报价'}</small></p><p>${esc(line.cloudScope)}</p>${list(isEnterprise?['3 个岗位配置，从 16 个岗位中选择','10 名使用成员，非 10 个同时执行任务','1 条标准流程模板，自助配置','每月 1,000 次模型调用、5GB 知识空间','不含定制连接器与人工实施']:['按资料范围选择云端处理边界','确认角色、知识与流程后开展试点','系统接口、模型用量与运维单列','不预设全量数据可上传公有云'])}<p class="plan-bottom">${isEnterprise?'新增岗位建议 ¥99/个/月，增加岗位配置，不增加成员与用量配额。':'云端形态需按单位要求确定，不默认与企业云端入门同价。'}</p></article>
       <article class="detail-plan ${!isEnterprise?'recommended':''}"><span class="plan-label">${isEnterprise?'自有算力':'建议起步'}</span><h3>${line.id==='industry'?'行业场景交付':'本地标准部署'}</h3><p class="detail-price">${money(line.privatePrice)}<small>${line.id==='industry'?'/ 场景起':'/ 套起'}</small></p><p>${esc(line.privateScope)}</p>${list(['标准软件授权与基础部署','已有标准能力与模板的配置','首年基础维护与使用培训','1 个已有标准接口的配置调试','不含硬件、定制开发和历史数据治理'])}<p class="plan-bottom">${line.id==='industry'?'一个场景的范围需先明确；不包含全部 7 个行业或 21 个岗位。':'3 个岗位由你选择；新增岗位或流程按适配范围评估。'}</p></article>
-      <article class="detail-plan"><span class="plan-label">逐步扩展</span><h3>已有平台 / 一体机</h3><p class="detail-price">按差异报价<small>复用已有软件与算力</small></p><p>已有智域平台或智立方，可先评估现有资源。</p>${list(['复用模型、知识库与已授权能力','数字员工新增岗位与流程单独评估','本地模型与云端工具可按需组合','新购硬件与实施分别列项'])}<p class="plan-bottom">智立方硬件及原标准软件方案参考 Lite ¥39,800 / Pro ¥59,800；数字员工适配另评估，不默认包含在原一体机价格中。</p></article>
+      <article class="detail-plan"><span class="plan-label">逐步扩展</span><h3>已有平台 / 一体机</h3><p class="detail-price">按差异报价<small>复用已有软件与算力</small></p><p>已有龙江智域平台或智立方，可先评估现有资源。</p>${list(['复用模型、知识库与已授权能力','数字员工新增岗位与流程单独评估','本地模型与云端工具可按需组合','新购硬件与实施分别列项'])}<p class="plan-bottom">智立方硬件及原标准软件方案参考 Lite ¥39,800 / Pro ¥59,800；数字员工适配另评估，不默认包含在原一体机价格中。</p></article>
     </div>
     <details class="detail-disclosure"><summary>起步价格包含什么？哪些需要另算？</summary><p>所有价格均为产品方案建议，未取得供应商正式报价或交付成本单。岗位数指配置的数字角色数，成员数指使用账号数，都不代表并发执行能力；岗位模板本身不等于已接通业务系统。</p><p>企业云端 ¥499/月是小范围标准能力、自助配置套餐；¥99/新增岗位/月仅增角色配置，不含新的定制流程。1,000 次为模型调用次数，多步任务会消耗多次调用；单次输入≤8K tokens、总生成≤2K tokens（含思考）。额度不足暂停或另购，先确认价格，不自动超额扣费。</p><p>本地起步方案中的“标准接口”指现成连接器及可直接使用、已获授权的接口，限一个系统的基本配置；新增 RPA 运行器、桌面端适配、复杂权限、审批流、语音、数字人形象与视频交互、第三方软件、联网检索、硬件、现场实施与数据治理另行评估。虚拟政务人岗位不默认包含实时数字人音视频服务。</p><p>软件授权、模型许可、可配置成员数、税费、保修、次年维护及验收要求须在正式报价单明确。已有平台按新增范围核价，不将整套平台价格简单相加。</p></details>
     <details class="detail-disclosure"><summary>一体机能带多少数字员工同时工作？</summary><p>岗位角色数量与算力无直接对应关系。同一台设备上的数字员工和智能体共享模型、内存和任务队列，多步流程会占用更多资源。</p><p>沿用此前短文本估算：Lite 可同时为约 1–2 人回答，Pro 约 2–4 人；条件为单机 Qwen3.6-35B-A3B Q4、输入约 2K tokens、上下文≤8K、总生成≤512 tokens。这不是数字员工多步流程的并发承诺。真实工作流需连同工具、RPA、检索和人工确认环节一起测试，超出容量的任务排队。</p></details>
