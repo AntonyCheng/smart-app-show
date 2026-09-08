@@ -34,7 +34,7 @@
 
   /* 语义化矩阵：品牌下分通用和行业两个产品分组，链接进入独立详情。 */
   function renderHeroVisual() {
-    const uses = ["办公协同", "研究决策", "内容创作", "知识问答", "数据分析", "会议记录"];
+    const uses = ["办公协同", "研究决策", "内容创作", "知识问答", "数据分析", "会议记录", "法律合规"];
     $("#hero-matrix").innerHTML = `
       <div class="matrix-root"><span class="matrix-logo">智</span><div><p>AI AGENT FAMILY</p><h2>${esc(SITE.brand)} <span>· 智系列</span></h2></div><span class="matrix-index">产品矩阵</span></div>
       <div class="matrix-branch" aria-hidden="true"></div>
