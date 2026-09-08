@@ -51,8 +51,8 @@
       <div class="employee-line-title"><span class="employee-symbol" aria-hidden="true">${['企','政','业'][i]}</span><div><p>${esc(l.eyebrow)}</p><h3>数字员工 · ${esc(l.name)}</h3></div></div>
       <p class="employee-line-promise">${esc(l.tagline)}</p><p class="employee-line-desc">${esc(l.desc)}</p>
       <div class="employee-line-tags">${l.highlights.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
-      <p class="employee-line-count">${esc(l.count)} · 按需配置</p><div class="employee-line-price"><span>建议起步价</span><b>¥${l.price.toLocaleString('zh-CN')}</b><small>${esc(l.unit)}</small></div>
-      <a class="btn btn-outline" href="employees.html?line=${l.id}">查看岗位、部署与价格 →</a>
+      <p class="employee-line-count">${esc(l.count)} · 按需配置</p>${SITE.showPricing?`<div class="employee-line-price"><span>建议起步价</span><b>¥${l.price.toLocaleString('zh-CN')}</b><small>${esc(l.unit)}</small></div>`:''}
+      <a class="btn btn-outline" href="employees.html?line=${l.id}">${SITE.showPricing?'查看岗位、部署与价格 →':'查看岗位与部署方式 →'}</a>
     </article>`).join('');
   }
 
@@ -90,10 +90,10 @@
           ${caps.map((c) => `<span class="cap">${esc(c)}</span>`).join("")}
           ${more > 0 ? `<span class="cap cap-more">+${more}</span>` : ""}
         </div>
-        <p class="card-price">云端建议价 <b>¥${pricingFor(a).monthly}</b> / 人 / 月</p>
+        ${SITE.showPricing?`<p class="card-price">云端建议价 <b>¥${pricingFor(a).monthly}</b> / 人 / 月</p>`:''}
         <div class="card-foot">
           <span class="badge ${(a.status || "online")}">${STATUS[a.status] ? STATUS[a.status].label : ""}</span>
-          <span class="card-cta">详情与价格 ${ARROW_SVG}</span>
+          <span class="card-cta">${SITE.showPricing?'详情与价格':'查看详情'} ${ARROW_SVG}</span>
         </div>
       </a>`;
   }

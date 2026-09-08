@@ -20,9 +20,10 @@
   const list = values => `<ul class="detail-list">${values.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`;
   const trial = trialUrlOf(item);
   const trialReady = !planned && /^https?:\/\//.test(trial) && !new URL(trial).hostname.endsWith('example.com');
-  document.title = name + ' · 用途、部署与价格 · 智域';
+  document.title = name + (SITE.showPricing ? ' · 用途、部署与价格 · 智域' : ' · 用途与部署 · 智域');
   function deployment() {
     if (planned) return `<section id="deployment" class="detail-section"><div class="detail-section-title"><h2>部署与价格</h2><span>尚未开放订购</span></div><div class="planned-note"><h3>方案规划中，暂不报价</h3><p>拟支持云端、私有化和智立方一体机。具体能力、适配范围与交付费用将在方案确认后公布。</p><a href="index.html#industry">先查看已上线的行业方案 →</a></div></section>`;
+    if (!SITE.showPricing) return `<section id="deployment" class="detail-section"><div class="detail-section-title"><h2>部署方式</h2><span>产品展示阶段</span></div><p class="detail-muted">支持云端订阅、私有化部署与智立方一体机三种方式，当前页面为产品功能展示，具体价格与套餐范围暂未公开。</p></section>`;
     return `<section id="deployment" class="detail-section"><div class="detail-section-title"><h2>怎么部署，多少钱</h2><span>当前产品 · 建议方案价</span></div>
       <p class="detail-muted">以下三种方式任选一种。云端费用按订阅收取，私有化与一体机按交付项目计价。</p>
       <div class="detail-plans">
@@ -44,24 +45,22 @@
   host.innerHTML = `
     <nav class="breadcrumbs" aria-label="当前位置"><a href="index.html">产品首页</a><span>/</span><a href="index.html#${isSet || members.length && !GENERAL_AGENTS.some(a=>a.id===item.id) ? 'industry' : 'general'}">${isSet?'行业方案':'智能体'}</a><span>/</span><span>${esc(item.name)}</span></nav>
     <section class="detail-heading"><div class="detail-heading-copy"><span class="badge ${item.status}">${esc(STATUS[item.status].label)}</span><h1>${esc(name)}</h1><p class="detail-tagline">${esc(item.tagline || (planned?'面向行业工作的智能助手方案（规划）':'按岗位组合助手，解决日常业务问题'))}</p><p class="detail-description">${esc(item.desc)}</p></div>
-      <aside class="detail-summary"><span>${planned?'方案状态':'云端订阅 · 建议价'}</span><strong>${planned?'规划中':money(price.monthly)}${planned?'':`<small>${isSet?'/ 5人团队 / 月':'/ 人 / 月'}</small>`}</strong>${trialReady?`<a class="btn btn-red" href="${esc(trial)}" target="_blank" rel="noopener noreferrer">进入试用系统 ↗</a>`:planned?'':'<span class="trial-pending">线上试用入口待开放</span>'}<a class="btn btn-red" href="#deployment">${planned?'查看规划范围':'查看部署与价格'}</a></aside>
+      <aside class="detail-summary"><span>${planned?'方案状态':SITE.showPricing?'云端订阅 · 建议价':'产品状态'}</span><strong>${planned?'规划中':SITE.showPricing?money(price.monthly):esc(STATUS[item.status].label)}${planned||!SITE.showPricing?'':`<small>${isSet?'/ 5人团队 / 月':'/ 人 / 月'}</small>`}</strong>${trialReady?`<a class="btn btn-red" href="${esc(trial)}" target="_blank" rel="noopener noreferrer">进入试用系统 ↗</a>`:planned?'':'<span class="trial-pending">线上试用入口待开放</span>'}<a class="btn btn-red" href="#deployment">${planned?'查看规划范围':SITE.showPricing?'查看部署与价格':'查看部署方式'}</a></aside>
     </section>
     <section class="detail-section" id="usage"><div class="detail-section-title"><h2>${planned?'计划如何帮助你':'能帮你做什么'}</h2></div><p class="detail-audience"><b>适合谁用</b>${esc(item.audience)}</p>
       ${!isSet?`<div class="capability-strip">${item.caps.map((c,i)=>`<div><span>0${i+1}</span><h3>${esc(c)}</h3></div>`).join('')}</div>`:''}
       <div class="usage-layout"><div class="usage-steps"><div><span>你提供</span><p>${esc(item.inputs)}</p></div><div><span>${planned?'预期结果':'你得到'}</span><p>${esc(item.outputs)}</p></div></div><div class="detail-example"><b>${isSet?'一个使用场景':'试着这样提问'}</b><p>${esc(item.example || item.scenario)}</p></div></div>
       ${item.boundary?`<p class="detail-boundary">${esc(item.boundary)}</p>`:''}
     </section>
-    ${children.length?`<section class="detail-section"><div class="detail-section-title"><h2>选一个助手，开始具体工作</h2><span>${children.length} 个助手</span></div><div class="related-grid">${children.map(a=>`<a href="detail.html?agent=${a.id}"><h3>${esc(a.name)}</h3><p>${esc(a.tagline)}</p><span>单独订阅 ¥${pricingFor(a).monthly}/人/月 · 查看详情 →</span></a>`).join('')}</div></section>`:''}
+    ${children.length?`<section class="detail-section"><div class="detail-section-title"><h2>选一个助手，开始具体工作</h2><span>${children.length} 个助手</span></div><div class="related-grid">${children.map(a=>`<a href="detail.html?agent=${a.id}"><h3>${esc(a.name)}</h3><p>${esc(a.tagline)}</p><span>${SITE.showPricing?`单独订阅 ¥${pricingFor(a).monthly}/人/月 · `:''}查看详情 →</span></a>`).join('')}</div></section>`:''}
     ${item.forms && item.forms.length?`<section class="detail-section" id="forms"><div class="detail-section-title"><h2>两种使用形态，按场景选择</h2><span>${item.forms.length} 种形态</span></div><p class="detail-muted">线下沟通用录音记录，远程协作用音视频会议，两种形态可单独选购。</p>
       <div class="detail-forms">${item.forms.map(f=>`<article class="detail-form"><div class="detail-form-top"><svg viewBox="0 0 24 24" aria-hidden="true">${f.icon}</svg><div><h3>${esc(f.name)}</h3><p class="tagline">${esc(f.tagline)}</p></div></div>
         <p class="desc">${esc(f.desc)}</p>
         <ol class="detail-list">${f.steps.map(s=>`<li><b>${esc(s[0])}</b>：${esc(s[1])}</li>`).join('')}</ol>
         <p class="detail-example"><b>一个使用场景</b>${esc(f.example)}</p>
-        <p class="plan-label">${esc(f.priceCaption)}</p>
-        <p class="detail-price">¥${f.price}<small>${esc(f.unit)}</small></p>
-        <p class="detail-muted">${esc(f.scope)}</p>
+        ${SITE.showPricing?`<p class="plan-label">${esc(f.priceCaption)}</p><p class="detail-price">¥${f.price}<small>${esc(f.unit)}</small></p><p class="detail-muted">${esc(f.scope)}</p>`:''}
         <p class="detail-boundary">${esc(f.boundary)}</p>
-        ${f.priceNote?`<details class="detail-disclosure"><summary>定价参考</summary><p>${esc(f.priceNote)}</p>${f.priceNoteUrl?`<p><a href="${esc(f.priceNoteUrl)}" target="_blank" rel="noopener noreferrer">查看官方定价参考 ↗</a></p>`:''}</details>`:''}
+        ${SITE.showPricing&&f.priceNote?`<details class="detail-disclosure"><summary>定价参考</summary><p>${esc(f.priceNote)}</p>${f.priceNoteUrl?`<p><a href="${esc(f.priceNoteUrl)}" target="_blank" rel="noopener noreferrer">查看官方定价参考 ↗</a></p>`:''}</details>`:''}
       </article>`).join('')}</div>
     </section>`:''}
     ${planned?`<section class="detail-section"><h2>拟建设的能力</h2>${list(item.roadmap || [])}<p class="detail-muted">能力与部署适配尚待确认，规划方向不代表现成在售功能。</p></section>`:''}
