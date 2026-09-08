@@ -42,7 +42,7 @@ const GENERAL_AGENTS = [
       "跨部门协同提醒",
     ],
     status: "online",
-    trialPath: "https://meeting.openxlab.cn",
+    trialPath: "http://60.205.157.106:7173/",
   },
   {
     id: "zhiyan",
