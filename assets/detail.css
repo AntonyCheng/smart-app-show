@@ -46,3 +46,11 @@
 .planned-note { background: var(--surface-2); border-radius: 10px; padding: 24px; }.planned-note h3 { font-size: 19px; }.planned-note p { color: var(--text-2); margin: 12px 0 18px; line-height: 1.8; }.planned-note a { color: var(--text-brand); }
 @media(max-width:900px) { .detail-heading { gap: 28px; grid-template-columns: minmax(0,1fr) 250px; }.detail-plan { padding: 18px; }.detail-plans { gap: 12px; } }
 @media(max-width:700px) { .detail-heading, .detail-plans, .usage-layout, .source-list, .hardware-grid { grid-template-columns: 1fr; }.detail-heading { gap: 22px; padding-top: 4px; }.detail-summary { gap: 12px; }.detail-summary strong { font-size: 32px; }.detail-summary strong small { display: inline; margin-left: 8px; }.capability-strip { gap: 12px; }.capability-strip h3 { font-size: 15px; }.detail-section-title { flex-wrap: wrap; gap: 4px; }.detail-section h2 { font-size: 22px; }.detail-tagline { font-size: 19px; }.detail-description { font-size: 15px; }.detail-plan { padding: 22px; }.related-grid { grid-template-columns: 1fr; }.detail-main { padding-bottom: 0; } }
+
+/* 客户经理工具包：表格与内部提示样式 */
+.sales-muted { color: var(--text-3); font-size: 12px; }
+.sales-table-wrap { overflow-x: auto; margin: 4px 0 8px; }
+.sales-table { width: 100%; border-collapse: collapse; font-size: 13.5px; line-height: 1.7; min-width: 640px; }
+.sales-table th, .sales-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+.sales-table th { background: var(--surface-2); color: var(--text-1); font-weight: 600; white-space: nowrap; }
+.sales-table td { color: var(--text-2); }

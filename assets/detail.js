@@ -21,6 +21,17 @@
   const trial = trialUrlOf(item);
   const trialReady = !planned && /^https?:\/\//.test(trial) && !new URL(trial).hostname.endsWith('example.com');
   document.title = name + (SITE.showPricing ? ' · 用途、部署与价格 · 龙江智域' : ' · 用途与部署 · 龙江智域');
+  // 有销售资料的智能体在顶部导航追加直达工具包的入口
+  if (typeof SALES_KITS !== 'undefined' && SALES_KITS[item.id]) {
+    const nav = document.querySelector('header.topbar nav.nav');
+    if (nav) {
+      const link = document.createElement('a');
+      link.className = 'nav-link';
+      link.href = 'sales.html?agent=' + item.id;
+      link.textContent = '客户经理工具';
+      nav.appendChild(link);
+    }
+  }
   function deployment() {
     if (planned) return `<section id="deployment" class="detail-section"><div class="detail-section-title"><h2>部署与价格</h2><span>尚未开放订购</span></div><div class="planned-note"><h3>方案规划中，暂不报价</h3><p>拟支持云端、私有化和智立方一体机。具体能力、适配范围与交付费用将在方案确认后公布。</p><a href="index.html#industry">先查看已上线的行业方案 →</a></div></section>`;
     if (!SITE.showPricing) return `<section id="deployment" class="detail-section"><div class="detail-section-title"><h2>部署方式</h2><span>产品展示阶段</span></div><p class="detail-muted">支持云端订阅、私有化部署与智立方一体机三种方式，当前页面为产品功能展示，具体价格与套餐范围暂未公开。</p></section>`;

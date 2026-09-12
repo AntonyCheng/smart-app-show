@@ -7,6 +7,7 @@
 - `index.html`：品牌矩阵、通用智能体、行业方案和选购引导。卡片是真实链接，云端起步价格直接可见。
 - `detail.html?agent=zhichuang`：独立智能体详情，展示用途、输入与结果、示例、部署与建议价。
 - `detail.html?set=zhiqi`：行业组合详情，附助手入口和组合部署价格。
+- `sales.html?agent=zhifa`：客户经理工具包（内部销售资料），入口在对应智能体详情页顶部导航。
 - 旧 `index.html#agent=…` / `#set=…` 链接自动转入独立详情页。
 - 不再使用弹层或内部滚动。原生浏览器返回、刷新、分享地址、新标签打开均可用。
 - 首页原 #pricing / #deploy / #box-card 锚点进入选购引导；详细方案已移到各产品内。
@@ -39,7 +40,7 @@ SITE.trialBase 仍为原占位地址 https://ai-trial.example.com。详情页检
 
 ## 验证
 
-`node --check assets/app.js`、`node --check assets/data.js`、`node --check assets/detail.js`。
+`node --check assets/app.js`、`node --check assets/data.js`、`node --check assets/detail.js`、`node --check assets/sales.js`、`node --check assets/sales-data.js`。
 已检查全部28个详情的数据渲染、原生导航、价格关联、规划状态、旧链接、手机宽度和浏览器错误；网页检查不代表硬件性能验收。
 
 ## 数字员工产品线（2026-09-06）
@@ -58,3 +59,15 @@ SITE.trialBase 仍为原占位地址 https://ai-trial.example.com。详情页检
 覆盖金融、零售、教育、政务、交通、会展、酒店、工业、康养、招聘十大行业，仅做能力与场景介绍，不接入试用系统，不参与 SITE.showPricing 报价开关。
 数据在 `assets/humans-data.js`（`DIGITAL_HUMANS`），渲染在 `assets/humans.js`，复用 `assets/styles.css` 的卡片组件与 `assets/detail.css` 的详情页排版，无需新增独立样式表。
 部署需一并上传 humans.html 及 assets/humans-data.js、assets/humans.js。
+
+## 客户经理工具包（2026-09-12）
+
+面向客户经理的销售资料页 `sales.html?agent=zhichuang` 等，一个智能体一个工具包。当前仅智创、智法、智数、智研四个通用智能体配备完整销售资料，其余 id 访问会提示未找到。
+
+- 唯一入口在智能体详情页顶部导航：`assets/detail.js` 按 `SALES_KITS[item.id]` 是否存在动态追加"客户经理工具"链接，直达对应工具包（`sales.html?agent=xxx`）。首页与详情页正文不设其他入口；`sales.html` 无参数访问直接跳回产品首页，不提供聚合列表页。
+- 数据在 `assets/sales-data.js`（`SALES_KITS`，按智能体 id 组织），渲染在 `assets/sales.js`，复用 `assets/detail.css` 排版并新增表格样式。
+- 每个工具包包含：一句话定位、目标客户与痛点、最值得卖的能力、优先成交场景与 30 秒话术、客户画像与需求访谈问题、销售话术与 Demo 脚本、常见异议应对、竞品对比与销售红线、私有化项目报价参考。
+- 报价参考章节明确标注"内部参考、非对外报价"，与详情页部署章节的云端订阅价格体系（`AGENT_PRICE_TIERS` / `PRICE_PROFILES`）相互独立，不共用同一套定价逻辑，避免客户经理误用。
+- `sales.html` 面包屑为"产品首页 / 通用智能体 / 智能体名 / 客户经理工具包"，体现从属层级。
+- 部署需一并上传 sales.html、assets/sales-data.js、assets/sales.js；detail.html 中 `<script src="assets/sales-data.js">` 需一起上线（首页 index.html 不加载该文件）。
+- 智创/智法/智数/智研在 `assets/data.js`（`desc`/`caps`/`AGENT_GUIDES`）中的介绍已同步加深，与工具包中的定位保持一致。
